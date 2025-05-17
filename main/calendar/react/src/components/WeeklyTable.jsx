@@ -2,9 +2,11 @@ import EventItem from './EventItem';
 import { Link } from 'react-router-dom';
 import '../App.css';
 
+// add event page
 // take acct for dates not just days 
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
+// placeholder example event blocks for when rest api is implemented, use these parameters
 const events = {
     Monday: [{ title: 'Meeting', time: '10:00 AM' }],
     Wednesday: [{ title: 'Gym', time: '6:00 PM' }, { title: 'Call Mom', time: '8:00 PM' }],

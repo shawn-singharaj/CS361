@@ -6,6 +6,9 @@ import DailyView from './pages/DailyView';
 import WeeklyView from './pages/WeeklyView';
 import Navigation from './components/Navigation';
 
+
+// TODO: REST API, Add event page, edit event page(make events clickable), remove placeholders,
+// login/user database, UI, settings/personalization/color theme page
 function App() {
 
   return (

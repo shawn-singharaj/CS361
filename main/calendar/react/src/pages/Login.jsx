@@ -8,7 +8,7 @@ function Login(){
     const handleLogin = (e) => {
         e.preventDefault();
         console.log('Logging in with:', { email, password });
-        // validation logic
+        // add email/password validation logic, mongodb database?
       };
 
     return(
