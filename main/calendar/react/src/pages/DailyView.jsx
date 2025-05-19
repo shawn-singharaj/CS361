@@ -13,7 +13,7 @@ function DailyView(){
     const { day } = useParams();
 
     const todaysEvents = events[day] || [];
-
+    // change the placeholder in the dailytable element
     return(
         <>
             <h2>Daily View</h2>
