@@ -47,7 +47,7 @@ Example request:
 
 
 Receiving Data: 
-  After setting up, after sending a request on the test_requests.http file, a new window will open with the response body containing the parameters of each study session, response code, and other response details. 
+  After setting up, after sending a request on the test_requests.http file, a new window will open with the response body containing the parameters of each study session, response code, and other response details. These changes will be reflected on the MongoDB database.
 
 Example response:
       HTTP/1.1 201 Created
@@ -70,3 +70,7 @@ Example response:
         "_id": "682bc789715a17fe0907a034",
         "__v": 0
       }
+![Screenshot 2025-05-19 172628](https://github.com/user-attachments/assets/cef77363-d37b-4896-acbb-0837ae2f0ff9)
+
+
+     
