@@ -31,42 +31,42 @@ Requesting Data:
    To test the HTTP responses, a test_requests.http file has been provided to send requests that post, get, update, and delete the study sessions if you'd like to use it. After setting up, just change the request bodies (i.e. name, num_breaks, etc.) as desired and click "send request" above the request headers. Then it should state that it has sent the request.
 
 Example request:
-POST http://localhost:3000/studysessions HTTP/1.1
-content-type: application/json
-
-{
-    "name": "Study Session Example",
-    "full_dur": 200,
-    "num_breaks": 4,
-    "break_dur": 5,
-    "long_break_dur": 20,
-    "study_dur": 25,
-    "study_link": "https://youtu.be/rBpApqtG7Us?si=kwFthg-jaZMDUKuO",
-    "break_link": "https://youtu.be/rBpApqtG7Us?si=kwFthg-jaZMDUKuO" 
-}
+      POST http://localhost:3000/studysessions HTTP/1.1
+      content-type: application/json
+      
+      {
+          "name": "Study Session Example",
+          "full_dur": 200,
+          "num_breaks": 4,
+          "break_dur": 5,
+          "long_break_dur": 20,
+          "study_dur": 25,
+          "study_link": "https://youtu.be/rBpApqtG7Us?si=kwFthg-jaZMDUKuO",
+          "break_link": "https://youtu.be/rBpApqtG7Us?si=kwFthg-jaZMDUKuO" 
+      }
 
 
 Receiving Data: 
   After setting up, after sending a request on the test_requests.http file, a new window will open with the response body containing the parameters of each study session, response code, and other response details. 
 
 Example response:
-HTTP/1.1 201 Created
-X-Powered-By: Express
-Content-Type: application/json; charset=utf-8
-Content-Length: 280
-ETag: W/"118-1QfN7MDONisqR9HMZmcJQJtzHz8"
-Date: Tue, 20 May 2025 00:06:33 GMT
-Connection: close
-
-{
-  "name": "Study Session Example",
-  "full_dur": 200,
-  "num_breaks": 4,
-  "break_dur": 5,
-  "long_break_dur": 20,
-  "study_dur": 25,
-  "study_link": "https://youtu.be/rBpApqtG7Us?si=kwFthg-jaZMDUKuO",
-  "break_link": "https://youtu.be/rBpApqtG7Us?si=kwFthg-jaZMDUKuO",
-  "_id": "682bc789715a17fe0907a034",
-  "__v": 0
-}
+      HTTP/1.1 201 Created
+      X-Powered-By: Express
+      Content-Type: application/json; charset=utf-8
+      Content-Length: 280
+      ETag: W/"118-1QfN7MDONisqR9HMZmcJQJtzHz8"
+      Date: Tue, 20 May 2025 00:06:33 GMT
+      Connection: close
+      
+      {
+        "name": "Study Session Example",
+        "full_dur": 200,
+        "num_breaks": 4,
+        "break_dur": 5,
+        "long_break_dur": 20,
+        "study_dur": 25,
+        "study_link": "https://youtu.be/rBpApqtG7Us?si=kwFthg-jaZMDUKuO",
+        "break_link": "https://youtu.be/rBpApqtG7Us?si=kwFthg-jaZMDUKuO",
+        "_id": "682bc789715a17fe0907a034",
+        "__v": 0
+      }
