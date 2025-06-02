@@ -1,6 +1,7 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import DailyTable from '../components/DailyTable';
+import Navigation from '../components/Navigation';
 
 // placeholders until rest api implemented
 const events = {
@@ -16,6 +17,7 @@ function DailyView(){
     // change the placeholder in the dailytable element
     return(
         <>
+            <Navigation/>
             <h2>Daily View</h2>
             <DailyTable dayOfWeek={day} events={events.Monday}/>
         </>

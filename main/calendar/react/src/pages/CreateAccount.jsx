@@ -9,10 +9,10 @@ function Login(){
 
     const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
+    const handleCreate = async (e) => {
         e.preventDefault();
         try{
-            const response = await fetch('http://localhost:3000/login', {
+            const response = await fetch('http://localhost:3000/users', {
                 method: 'POST',
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({email, password}
@@ -20,25 +20,24 @@ function Login(){
             });
 
             const data = await response.json();
-            if(data.success){
-                alert('Login Successful');
+            if(response.status == 201){
+                alert('Account Creation Successful!');
                 navigate('/weekly-view');
             }
             else{
-                setError(data.error || "Login Failed");
+                setError(data.error || "Account Already Exists");
             }
         }
         catch(err){
             setError("Server error");
-            console.error("Login error:", err);
         }
       };
 
     return(
         <div className="login-page">
-            <h2>Login</h2>
+            <h2>Create Your Account Here:</h2>
             {error && <p className="error">{error}</p>}
-            <form onSubmit={handleLogin} className="login-form">
+            <form onSubmit={handleCreate} className="login-form">
                 <div>
                     <label htmlFor="email">Email:</label><br />
                     <input
@@ -61,10 +60,9 @@ function Login(){
                     />
                 </div>
 
-                <button type="submit">Log In</button>
-                <button type="submit" onClick={() => navigate("/create-account")}>Create Account</button>
+                <button type="submit">Create Account</button>
 
-                <p>Logging in keeps your schedule saved across devices. Do not share your password.</p>
+                <p>Don't have an account yet? Create one here!</p>
             </form>
         </div>
     );

@@ -1,45 +1,23 @@
 // Get the mongoose object
 import mongoose from 'mongoose';
-import 'dotenv/config';
 
-let connection = undefined;
-let Event = undefined;
-
-/**
- * This function connects to the MongoDB server.
- */
-async function connect(){
-    try{
-        await mongoose.connect(process.env.MONGODB_CONNECT_STRING, {
-            dbName: 'events_db'
-        });
-        connection = mongoose.connection;
-        Event = createModel();
-        console.log("Successfully connected to MongoDB using Mongoose!");
-    } catch(err){
-        console.log(err);
-        throw Error(`Could not connect to MongoDB ${err.message}`)
-    }
-};
-
-function createModel(){
     // define schema
-    const eventSchema = mongoose.Schema({
-        date: {type: Date, required: true},
-        type: {type: String, required: true},
-        title: {type: String, required: true},
-        description: {type: String, required: false},
-        time_end: {type: Date, required: false},
-        reoccuring_day: {type: String, required: false},
+const eventSchema = mongoose.Schema({
+    date: {type: Date, required: true},
+    type: {type: String, required: true},
+    title: {type: String, required: true},
+    description: {type: String, required: false},
+    time_end: {type: Date, required: false},
+    reoccuring_day: {type: String, required: false},
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
     });
     // compile and return model
-    return mongoose.model("Event", eventSchema);
-};
+const Event =  mongoose.model("Event", eventSchema);
 
 // create an event for database
-async function createEvent(date, type, title, description, time_end, reoccuring_day){
+async function createEvent(date, type, title, description, time_end, reoccuring_day, userId){
     // create the new event object
-    const event = new event({date : date, type : type, title : title, description : description, time_end: time_end, reoccuring_day: reoccuring_day});
+    const event = new Event({date : date, type : type, title : title, description : description, time_end: time_end, reoccuring_day: reoccuring_day, userId : userId});
 
     return event.save();
 ;}
@@ -64,11 +42,11 @@ const findEventById = async (_id) => {
 };
 
 // update the event
-async function updateEvent(_id, date, type, title, description, time_end, reoccuring_day){
+async function updateEvent(_id, date, type, title, description, time_end, reoccuring_day, userId){
         // update by id
         const updated = await Event.findByIdAndUpdate(
             _id,
-            {date, type, title, description, time_end, reoccuring_day},
+            {date, type, title, description, time_end, reoccuring_day, userId},
             {new: true}
         );
         return updated;
@@ -85,4 +63,4 @@ async function deleteEventById(_id){
     }
 };
 
-export {connect, createEvent, findEvent, findEventById, updateEvent, deleteEventById};
+export {Event, createEvent, findEvent, findEventById, updateEvent, deleteEventById};

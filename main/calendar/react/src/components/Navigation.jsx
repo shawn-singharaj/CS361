@@ -2,7 +2,6 @@ import {Link, useNavigate} from 'react-router-dom';
 import '../App.css';
 
 function Navigation(){
-    // daily view doesnt work delete later
     const navigate = useNavigate();
 
     const handleLoginClick = (e) => {
@@ -17,10 +16,7 @@ function Navigation(){
          <nav className="app-nav">
             <div className="nav-buttons">
                 <Link to="/">
-                    <button className="nav-button" onClick={handleLoginClick}>Login</button>
-                </Link>
-                <Link to="/daily-view">
-                    <button className="nav-button">Daily View</button>
+                    <button className="nav-button" onClick={handleLoginClick}>Log Out</button>
                 </Link>
                 <Link to="/weekly-view">
                     <button className="nav-button">Weekly View</button>

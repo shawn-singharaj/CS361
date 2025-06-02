@@ -5,10 +5,11 @@ import Login from './pages/Login';
 import DailyView from './pages/DailyView';
 import WeeklyView from './pages/WeeklyView';
 import Navigation from './components/Navigation';
+import CreateAccount from './pages/CreateAccount';
 
 
-// TODO: REST API, Add event page, edit event page(make events clickable), remove placeholders,
-// login/user database, UI, settings/personalization/color theme page
+// TODO: show dates, events for one acct, Add event page, edit event page(make events clickable)
+//  settings page
 function App() {
 
   return (
@@ -20,11 +21,11 @@ function App() {
           your weekly and daily plans
         </p>
         <Router>
-          <Navigation/>
           <Routes>
             <Route path="/" element={<Login/>}></Route>
             <Route path="/weekly-view" element={ <WeeklyView/>}></Route>
             <Route path="/daily-view/:day" element={ <DailyView/>}></Route>
+            <Route path="/create-account" element={<CreateAccount/>}></Route>
           </Routes>
         </Router>
        </header>

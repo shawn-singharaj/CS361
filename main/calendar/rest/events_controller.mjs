@@ -1,41 +1,34 @@
-import 'dotenv/config';
 import express from 'express';
 import asyncHandler from 'express-async-handler';
 import * as events from './events_model.mjs';
 
-const app = express();
-app.use(express.json())
-
-const PORT = process.env.PORT;
-
-app.listen(PORT, async () => {
-    await events.connect(false)
-    console.log(`Server listening on port ${PORT}...`);
-});
+const router = express.Router();
 
 // create event
-app.post("/events", asyncHandler(async (req, res) => {
-    const {date, type, title, description, time_end, reoccuring_day} = req.body;
+router.post("/events", asyncHandler(async (req, res) => {
+    const {date, type, title, description, time_end, reoccuring_day, userId} = req.body;
 
     // required parameters
-    if(!date || !type || !title){
+    if(!date || !type || !title || !userId){
         return res.status(400).json({message: "Error: Incomplete Request"})
     }
 
     // create event
-    const Event = await events.createEvent(date, type, title, description, time_end, reoccuring_day);
+    const Event = await events.createEvent(date, type, title, description, time_end, reoccuring_day, userId);
     res.status(201).json(Event);
 }));
 
 // get all events
-app.get("/events", asyncHandler(async (req, res) =>{
-    const all_Events = await events.findEvent();
+router.get("/events", asyncHandler(async (req, res) =>{
+    const userId = req.query.userId;
+    const filter = userId ? { userId } : {};    
+    const all_Events = await events.findEvent(filter);
 
     res.status(200).json(all_Events);
 }));
 
 // get certain event
-app.get("/events/:id", asyncHandler(async(req, res) => {
+router.get("/events/:id", asyncHandler(async(req, res) => {
     const _id = req.params.id;
 
     if(_id){
@@ -50,9 +43,9 @@ app.get("/events/:id", asyncHandler(async(req, res) => {
 }));
 
 // update event by id
-app.put("/events/:id", asyncHandler(async (req, res) => {
+router.put("/events/:id", asyncHandler(async (req, res) => {
     const _id = req.params.id;
-    const {date, type, title, description, time_end, reoccuring_day} = req.body;
+    const {date, type, title, description, time_end, reoccuring_day, userId} = req.body;
 
      // required parameters
     if(!date || !type || !title){
@@ -60,7 +53,7 @@ app.put("/events/:id", asyncHandler(async (req, res) => {
     }
 
     if(_id){
-        const UpdatedEvent = await events.updateEvent(_id, date, type, title, description, time_end, reoccuring_day);
+        const UpdatedEvent = await events.updateEvent(_id, date, type, title, description, time_end, reoccuring_day, userId);
         if(UpdatedEvent){
             res.status(200).json(UpdatedEvent);
         }
@@ -71,7 +64,7 @@ app.put("/events/:id", asyncHandler(async (req, res) => {
 }));
 
 // delete event
-app.delete("/events/:id", asyncHandler(async (req, res) => {
+router.delete("/events/:id", asyncHandler(async (req, res) => {
     const _id = req.params.id;
     const deleted = await events.deleteEventById(_id);
 
@@ -83,3 +76,5 @@ app.delete("/events/:id", asyncHandler(async (req, res) => {
         return res.status(404).json({message: "Error: Not Found"});
     }
 }));
+
+export default router;
