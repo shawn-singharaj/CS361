@@ -22,7 +22,7 @@ function Login(){
             const data = await response.json();
             if(response.status == 201){
                 alert('Account Creation Successful!');
-                navigate('/weekly-view');
+                navigate('/');
             }
             else{
                 setError(data.error || "Account Already Exists");
