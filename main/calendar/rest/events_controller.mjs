@@ -1,15 +1,17 @@
 import express from 'express';
 import asyncHandler from 'express-async-handler';
 import * as events from './events_model.mjs';
+import mongoose from 'mongoose';
+
 
 const router = express.Router();
 
 // create event
-router.post("/events", asyncHandler(async (req, res) => {
+router.post("/", asyncHandler(async (req, res) => {
     const {date, type, title, description, time_end, reoccuring_day, userId} = req.body;
 
     // required parameters
-    if(!date || !type || !title || !userId){
+    if(!date || !title || !userId){
         return res.status(400).json({message: "Error: Incomplete Request"})
     }
 
@@ -19,7 +21,7 @@ router.post("/events", asyncHandler(async (req, res) => {
 }));
 
 // get all events
-router.get("/events", asyncHandler(async (req, res) =>{
+router.get("/", asyncHandler(async (req, res) =>{
     const userId = req.query.userId;
     const filter = userId ? { userId } : {};    
     const all_Events = await events.findEvent(filter);
@@ -28,7 +30,7 @@ router.get("/events", asyncHandler(async (req, res) =>{
 }));
 
 // get certain event
-router.get("/events/:id", asyncHandler(async(req, res) => {
+router.get("/:id", asyncHandler(async(req, res) => {
     const _id = req.params.id;
 
     if(_id){
@@ -42,8 +44,28 @@ router.get("/events/:id", asyncHandler(async(req, res) => {
     }
 }));
 
+// Get events by userId
+router.get('/user/:userId', asyncHandler(async (req, res) => {
+  const { userId } = req.params;
+  const {date} = req.query;
+
+  let filter = {userId};
+
+
+  if (date) {
+    const startDate = new Date(date);
+    const endDate = new Date(date);
+    endDate.setDate(endDate.getDate() + 1);
+
+    filter.date = { $gte: startDate, $lt: endDate };
+  }
+
+  const userevents = await events.findEvent(filter); 
+  res.status(200).json(userevents);
+}));
+
 // update event by id
-router.put("/events/:id", asyncHandler(async (req, res) => {
+router.put("/:id", asyncHandler(async (req, res) => {
     const _id = req.params.id;
     const {date, type, title, description, time_end, reoccuring_day, userId} = req.body;
 
@@ -64,7 +86,7 @@ router.put("/events/:id", asyncHandler(async (req, res) => {
 }));
 
 // delete event
-router.delete("/events/:id", asyncHandler(async (req, res) => {
+router.delete("/:id", asyncHandler(async (req, res) => {
     const _id = req.params.id;
     const deleted = await events.deleteEventById(_id);
 

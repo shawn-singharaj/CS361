@@ -1,10 +1,12 @@
 // Get the mongoose object
 import mongoose from 'mongoose';
+import { ObjectId } from "mongodb";
+
 
     // define schema
 const eventSchema = mongoose.Schema({
     date: {type: Date, required: true},
-    type: {type: String, required: true},
+    type: {type: String, required: false},
     title: {type: String, required: true},
     description: {type: String, required: false},
     time_end: {type: Date, required: false},
@@ -13,6 +15,7 @@ const eventSchema = mongoose.Schema({
     });
     // compile and return model
 const Event =  mongoose.model("Event", eventSchema);
+
 
 // create an event for database
 async function createEvent(date, type, title, description, time_end, reoccuring_day, userId){

@@ -4,13 +4,13 @@ import WeeklyTable from '../components/WeeklyTable';
 import Navigation from '../components/Navigation';
 
 function WeeklyView () {
-    
+    const { userId } = useParams();
 
     return(
         <>
             <Navigation/>
             <h2>Weekly View</h2>
-            <WeeklyTable></WeeklyTable>
+            <WeeklyTable userId={userId}></WeeklyTable>
         </>
     );
 }

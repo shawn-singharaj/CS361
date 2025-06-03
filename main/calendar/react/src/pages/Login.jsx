@@ -22,7 +22,7 @@ function Login(){
             const data = await response.json();
             if(data.success){
                 alert('Login Successful');
-                navigate('/weekly-view');
+                navigate(`/weekly-view/${data.userId}`);
             }
             else{
                 setError(data.error || "Login Failed");

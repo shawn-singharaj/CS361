@@ -11,7 +11,7 @@ router.post("/login", asyncHandler(async (req, res) => {
   const User = await user.findEmail({email});
 
   if (User && User.password == password) { 
-    res.status(200).json({success: true});
+    res.status(200).json({success: true, userId: User._id});
   } else {
     res.status(401).json({message: "Incorrect Email or Password"});
   }

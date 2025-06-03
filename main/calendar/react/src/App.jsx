@@ -6,9 +6,11 @@ import DailyView from './pages/DailyView';
 import WeeklyView from './pages/WeeklyView';
 import Navigation from './components/Navigation';
 import CreateAccount from './pages/CreateAccount';
+import AddEvent from './pages/AddEvent';
+import EditEvent from './pages/EditEvent';
 
 
-// TODO: show dates, events for one acct, Add event page, edit event page(make events clickable)
+// TODO:  edit event page(make events clickable)
 //  settings page
 function App() {
 
@@ -23,9 +25,11 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Login/>}></Route>
-            <Route path="/weekly-view" element={ <WeeklyView/>}></Route>
-            <Route path="/daily-view/:day" element={ <DailyView/>}></Route>
+            <Route path="/weekly-view/:userId" element={ <WeeklyView/>}></Route>
+            <Route path="/daily-view/:userId/:month/:date/:day" element={ <DailyView/>}></Route>
             <Route path="/create-account" element={<CreateAccount/>}></Route>
+            <Route path="/addevent/:userId" element={<AddEvent/>}></Route>
+            <Route path="/editevent/:eventId" element={<EditEvent/>}></Route>        
           </Routes>
         </Router>
        </header>
