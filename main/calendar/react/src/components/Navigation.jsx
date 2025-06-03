@@ -22,6 +22,9 @@ function Navigation(){
                 <Link to={`/weekly-view/${userId}`}>
                     <button className="nav-button">Weekly View</button>
                 </Link>
+                <Link to={`/settings/${userId}`}>
+                    <button className="nav-button">Settings</button>
+                </Link>
             </div>
         </nav>
     );

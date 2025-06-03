@@ -8,10 +8,10 @@ import Navigation from './components/Navigation';
 import CreateAccount from './pages/CreateAccount';
 import AddEvent from './pages/AddEvent';
 import EditEvent from './pages/EditEvent';
+import Settings from './pages/Settings';
 
 
-// TODO:  edit event page(make events clickable)
-//  settings page
+
 function App() {
 
   return (
@@ -29,7 +29,8 @@ function App() {
             <Route path="/daily-view/:userId/:month/:date/:day" element={ <DailyView/>}></Route>
             <Route path="/create-account" element={<CreateAccount/>}></Route>
             <Route path="/addevent/:userId" element={<AddEvent/>}></Route>
-            <Route path="/editevent/:eventId" element={<EditEvent/>}></Route>        
+            <Route path="/editevent/:eventId" element={<EditEvent/>}></Route>
+            <Route path="/settings/:userId" element={<Settings/>}></Route>       
           </Routes>
         </Router>
        </header>

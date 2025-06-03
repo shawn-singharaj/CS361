@@ -70,7 +70,7 @@ router.put("/:id", asyncHandler(async (req, res) => {
     const {date, type, title, description, time_end, reoccuring_day, userId} = req.body;
 
      // required parameters
-    if(!date || !type || !title){
+    if(!date || !title){
         return res.status(400).json({message: "Error: Incomplete Request"})
     }
 

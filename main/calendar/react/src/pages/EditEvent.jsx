@@ -52,6 +52,23 @@ function EditEvent() {
       .catch((err) => console.error('Error updating event:', err));
   };
 
+  const handleDelete = () => {
+  if (window.confirm("Are you sure you want to delete this event?")) {
+    fetch(`http://localhost:3000/events/${eventId}`, {
+      method: 'DELETE',
+    })
+      .then(res => {
+        if (res.ok) {
+          alert("Event deleted successfully");
+          navigate(-1); // Go back after deletion
+        } else {
+          throw new Error('Failed to delete event');
+        }
+      })
+      .catch(err => console.error('Error deleting event:', err));
+  }
+};
+
   return (
     <div>
       <h1>Edit Event</h1>
@@ -62,6 +79,10 @@ function EditEvent() {
         <label>End Time: <input type="datetime-local" name="time_end" value={formData.time_end} onChange={handleChange} /></label><br />
         <label>Recurring Day: <input name="reoccuring_day" value={formData.reoccuring_day} onChange={handleChange} /></label><br />
         <button type="submit">Save Changes</button>
+        <div></div>
+        <button type="button" onClick={handleDelete} style={{ marginLeft: '10px', backgroundColor: 'red', color: 'white' }}>
+        Delete Event
+        </button>
       </form>
     </div>
   );
